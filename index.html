@@ -3,51 +3,49 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Comparador N°5 - Argentina 2026</title>
+    <title>Comparador N° 5 - Todo en Uno</title>
     <style>
-        :root { --primary: #2563eb; --secondary: #64748b; --success: #22c55e; --bg: #f8fafc; }
+        :root { --primary: #2563eb; --secondary: #64748b; --success: #22c55e; --bg: #f1f5f9; }
         body { font-family: -apple-system, system-ui, sans-serif; background: var(--bg); margin: 0; padding: 15px; }
-        .container { max-width: 600px; margin: auto; background: white; border-radius: 16px; box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1); overflow: hidden; }
+        .container { max-width: 600px; margin: auto; background: white; border-radius: 16px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); overflow: hidden; }
         
-        .tabs { display: flex; background: #f1f5f9; padding: 5px; }
-        .tab-btn { flex: 1; padding: 12px; border: none; background: none; cursor: pointer; font-weight: 600; color: var(--secondary); border-radius: 10px; transition: 0.2s; }
-        .tab-btn.active { background: white; color: var(--primary); box-shadow: 0 2px 4px rgba(0,0,0,0.05); }
-
-        .header { padding: 20px; text-align: center; border-bottom: 1px solid #e2e8f0; }
+        .header { padding: 20px; text-align: center; border-bottom: 1px solid #e2e8f0; background: white; }
         h1 { margin: 0; font-size: 1.4rem; color: #1e293b; }
-        
-        .list-container { padding: 15px; }
-        .brand-item { display: flex; justify-content: space-between; align-items: center; padding: 15px; border: 1px solid #e2e8f0; border-radius: 12px; margin-bottom: 10px; cursor: pointer; transition: 0.2s; }
+        h2.section-title { font-size: 1.1rem; padding: 15px 20px 5px; margin: 0; color: #64748b; text-transform: uppercase; letter-spacing: 0.05em; }
+
+        .list-container { padding: 10px 15px 20px; }
+        .brand-item { display: flex; justify-content: space-between; align-items: center; padding: 15px; border: 1px solid #e2e8f0; border-radius: 12px; margin-bottom: 8px; cursor: pointer; transition: 0.2s; background: white; }
         .brand-item:hover { border-color: var(--primary); background: #f0f7ff; }
-        .brand-info span { display: block; }
-        .name { font-weight: bold; color: #1e293b; }
-        .price { color: var(--success); font-weight: 600; font-size: 0.9rem; }
+        .name { font-weight: bold; color: #1e293b; display: block; }
+        .price { color: var(--success); font-weight: 700; font-size: 0.95rem; }
         
-        #detail-view { display: none; padding: 15px; }
-        .back-btn { background: none; border: none; color: var(--primary); font-weight: 600; cursor: pointer; padding: 10px 0; display: flex; align-items: center; gap: 5px; }
-        .link-card { display: block; text-decoration: none; background: #fff; border: 1px solid #e2e8f0; padding: 12px; border-radius: 10px; margin-bottom: 8px; color: #334155; font-size: 0.9rem; transition: 0.2s; word-break: break-word; }
-        .link-card:hover { background: #f8fafc; transform: translateX(5px); }
-        .store-name { font-weight: bold; color: var(--primary); }
+        #detail-view { display: none; padding: 15px; min-height: 400px; }
+        .back-btn { background: #f1f5f9; border: none; color: var(--primary); font-weight: 600; cursor: pointer; padding: 12px; border-radius: 8px; width: 100%; margin-bottom: 20px; text-align: left; }
+        .link-card { display: block; text-decoration: none; background: #fff; border: 1px solid #e2e8f0; padding: 15px; border-radius: 10px; margin-bottom: 10px; color: #334155; transition: 0.2s; box-shadow: 0 2px 4px rgba(0,0,0,0.02); }
+        .link-card:hover { border-color: var(--primary); background: #f8fafc; }
+        .store-name { font-weight: bold; color: var(--primary); font-size: 1rem; }
+        .price-tag { font-weight: bold; color: var(--success); }
     </style>
 </head>
 <body>
 
 <div class="container">
-    <div class="header">
-        <h1>📊 Repuestos N° 5</h1>
-        <small>Precios Ref. Enero 2026 - Argentina</small>
-    </div>
+    <div id="main-view">
+        <div class="header">
+            <h1>📊 Comparador N° 5</h1>
+            <small>Actualizado: Enero 2026</small>
+        </div>
 
-    <div class="tabs">
-        <button id="btn-blanco" class="tab-btn active" onclick="switchTab('blanco')">⚪ Blancos (8 hj)</button>
-        <button id="btn-color" class="tab-btn" onclick="switchTab('color')">🌈 Colores (6/8 hj)</button>
-    </div>
+        <h2 class="section-title">⚪ Hojas Blancas (8 hj)</h2>
+        <div id="list-blanco" class="list-container"></div>
 
-    <div id="main-view" class="list-container"></div>
+        <h2 class="section-title">🌈 Hojas de Colores (6 hj)</h2>
+        <div id="list-color" class="list-container"></div>
+    </div>
 
     <div id="detail-view">
         <button class="back-btn" onclick="showMain()">⬅ Volver al listado</button>
-        <h2 id="detail-title" style="font-size: 1.2rem; margin-bottom: 15px;"></h2>
+        <h2 id="detail-title" style="margin-bottom: 15px; color: #1e293b;"></h2>
         <div id="links-list"></div>
     </div>
 </div>
@@ -57,16 +55,16 @@
         blanco: [
             { 
                 brand: "Miguel Angel", 
-                range: "$1.100 - $1.800", 
+                range: "$750 - $1.500", 
                 links: [
-                    { store: "Alot", price: "$1.500", url: "https://alot.com.ar/product.asp?sku=RCAMA5D8B" },
                     { store: "Librería Thesis", price: "$1.250", url: "https://www.libreriathesis.com.ar/repuesto-escolar-dibujo-n-5-blanco-8-hojas-miguel-angel/" },
-                    { store: "Mercado Libre (Pack x10)", price: "$7.500 total", url: "https://www.mercadolibre.com.ar/pack-x10-repuesto-n5-hojas-dibujo-miguel-angel-blanco-x8h/p/MLA36531940" }
+                    { store: "Alot", price: "$1.500", url: "https://alot.com.ar/product.asp?sku=RCAMA5D8B" },
+                    { store: "Mercado Libre (Pack x10)", price: "$750 (por sobre)", url: "https://www.mercadolibre.com.ar/pack-x10-repuesto-n5-hojas-dibujo-miguel-angel-blanco-x8h/p/MLA36531940" }
                 ]
             },
             { 
                 brand: "Éxito (120g)", 
-                range: "$1.100 - $2.400", 
+                range: "$1.102 - $1.213", 
                 links: [
                     { store: "Librería San Pablo", price: "$1.102", url: "https://libreriasanpablo.com.ar/producto/69164/repuesto-de-dibujo-exito-n5-blanco-8-hojas-tipo-canson-art50848062-100901/" },
                     { store: "Ledesma Papel", price: "$1.213", url: "https://www.ledesmapapel.com.ar/productos/repuesto-dibujo-n5-exito-blanco-8-hojas-120-g-m2-c-100901/" }
@@ -74,16 +72,16 @@
             },
             { 
                 brand: "Luma / Mil28", 
-                range: "$800 - $1.300", 
+                range: "$750 - $920", 
                 links: [
+                    { store: "Ferniplast", price: "$750", url: "https://www.ferniplast.com/8361303-repuesto-dibujo-luma-n5-8-hj-blanco/p" },
                     { store: "Librería Lerma", price: "$800", url: "https://www.librerialerma.com.ar/productos/repuesto-de-dibujo-n-5-blanco-luma-5dknd/" },
-                    { store: "Alot (Mil28)", price: "$920", url: "https://alot.com.ar/product.asp?sku=RCAQTN3DB" },
-                    { store: "Ferniplast", price: "$750", url: "https://www.ferniplast.com/8361303-repuesto-dibujo-luma-n5-8-hj-blanco/p" }
+                    { store: "Alot (Mil28)", price: "$920", url: "https://alot.com.ar/product.asp?sku=RCAQTN3DB" }
                 ]
             },
             { 
                 brand: "El Nene", 
-                range: "$1.800 - $3.200", 
+                range: "$2.087 - $2.420", 
                 links: [
                     { store: "Librería San Pablo", price: "$2.087", url: "https://libreriasanpablo.com.ar/producto/67197/repuesto-de-dibujo-el-nene-n5-blanco-8-hojas-tipo-canson-art210672/" },
                     { store: "Vea Supermercados", price: "$2.415", url: "https://www.vea.com.ar/repuesto-n-5-blanco-8-hojas-el-nene/p" },
@@ -93,24 +91,24 @@
         ],
         color: [
             { 
-                brand: "Miguel Angel", 
-                range: "$1.500 - $2.200", 
+                brand: "Miguel Angel Colores", 
+                range: "$1.490 - $1.675", 
                 links: [
-                    { store: "Offiplast (ML)", price: "$1.675", url: "https://www.mercadolibre.com.ar/hojas-color-n3-miguel-angel-6-pack-con-3-agujeros-para-carpetas/p/MLA32143243" },
-                    { store: "Alot (Negro)", price: "$1.490", url: "https://alot.com.ar/dept_product.asp?dept_id=1750" }
+                    { store: "Alot (Negro)", price: "$1.490", url: "https://alot.com.ar/dept_product.asp?dept_id=1750" },
+                    { store: "Offiplast (ML)", price: "$1.675", url: "https://www.mercadolibre.com.ar/hojas-color-n3-miguel-angel-6-pack-con-3-agujeros-para-carpetas/p/MLA32143243" }
                 ]
             },
             { 
                 brand: "Éxito Colores", 
-                range: "$1.280 - $2.800", 
+                range: "$999 - $1.281", 
                 links: [
-                    { store: "Librería San Pablo", price: "$1.281", url: "https://libreriasanpablo.com.ar/producto/69199/repuesto-de-dibujo-exito-n5-color-6-hojas-tipo-canson-art50848061-100900-103214/" },
-                    { store: "Ferniplast", price: "$999", url: "https://www.ferniplast.com/5684104-repuesto-exito-n5-dibujo-6hj-color/p" }
+                    { store: "Ferniplast", price: "$999", url: "https://www.ferniplast.com/5684104-repuesto-exito-n5-dibujo-6hj-color/p" },
+                    { store: "Librería San Pablo", price: "$1.281", url: "https://libreriasanpablo.com.ar/producto/69199/repuesto-de-dibujo-exito-n5-color-6-hojas-tipo-canson-art50848061-100900-103214/" }
                 ]
             },
             { 
                 brand: "Luma Colores", 
-                range: "$990 - $1.800", 
+                range: "$999 - $1.296", 
                 links: [
                     { store: "Ferniplast", price: "$999", url: "https://www.ferniplast.com/8361305-repuesto-dibujo-luma-n5-6-hj-color/p" },
                     { store: "Librería San Pablo", price: "$1.296", url: "https://libreriasanpablo.com.ar/producto/67284/repuesto-de-dibujo-luma-n5-color-6-hojas-tipo-canson-art80-51/" }
@@ -118,7 +116,7 @@
             },
             { 
                 brand: "El Nene Colores", 
-                range: "$2.600 - $3.800", 
+                range: "$2.699 - $2.750", 
                 links: [
                     { store: "Super Mami", price: "$2.699", url: "https://www.supermami.com.ar/super/producto/hoja-repuesto-dibujo-el-nene-n5-color-6-hojas-x-un/_/A-3739308-3739308-s" },
                     { store: "Librería El Poli", price: "$2.750", url: "https://www.elpoli.com/productos/repuesto-de-hojas-escolar-el-nene-n5-color-6-hojas/" }
@@ -127,35 +125,31 @@
         ]
     };
 
-    let currentTab = 'blanco';
-
-    function switchTab(type) {
-        currentTab = type;
-        document.getElementById('btn-blanco').classList.toggle('active', type === 'blanco');
-        document.getElementById('btn-color').classList.toggle('active', type === 'color');
-        renderList();
+    function renderAll() {
+        renderSection('blanco', 'list-blanco');
+        renderSection('color', 'list-color');
     }
 
-    function renderList() {
-        const container = document.getElementById('main-view');
+    function renderSection(type, containerId) {
+        const container = document.getElementById(containerId);
         container.innerHTML = '';
-        database[currentTab].forEach((item, index) => {
+        database[type].forEach((item, index) => {
             const div = document.createElement('div');
             div.className = 'brand-item';
-            div.onclick = () => showDetail(index);
+            div.onclick = () => showDetail(type, index);
             div.innerHTML = `
                 <div class="brand-info">
                     <span class="name">${item.brand}</span>
                     <span class="price">${item.range}</span>
                 </div>
-                <div style="color: #cbd5e1">▶</div>
+                <div style="color: var(--primary); font-weight: bold;">VER →</div>
             `;
             container.appendChild(div);
         });
     }
 
-    function showDetail(index) {
-        const item = database[currentTab][index];
+    function showDetail(type, index) {
+        const item = database[type][index];
         document.getElementById('main-view').style.display = 'none';
         document.getElementById('detail-view').style.display = 'block';
         document.getElementById('detail-title').innerText = item.brand;
@@ -167,9 +161,14 @@
             a.className = 'link-card';
             a.href = l.url;
             a.target = '_blank';
-            a.innerHTML = `<span class="store-name">${l.store}</span>: ${l.price}`;
+            a.innerHTML = `
+                <div class="store-name">${l.store}</div>
+                <div class="price-tag">Precio: ${l.price}</div>
+                <small style="color: #94a3b8">Hacer clic para ir a la tienda</small>
+            `;
             list.appendChild(a);
         });
+        window.scrollTo(0,0);
     }
 
     function showMain() {
@@ -177,7 +176,7 @@
         document.getElementById('detail-view').style.display = 'none';
     }
 
-    renderList();
+    renderAll();
 </script>
 </body>
 </html>
